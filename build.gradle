@@ -14,7 +14,7 @@ buildscript {
 }
 
 plugins {
-    id "com.moowork.node" version "1.2.0"
+    id "com.moowork.gulp" version "1.2.0"
 }
 
 apply plugin: 'java'
@@ -36,19 +36,14 @@ repositories {
 
 // read more here: https://github.com/srs/gradle-node-plugin/blob/master/docs/node.md
 node {
-
-    // If true, it will download node using above parameters.
-    // If false, it will try to use globally installed node.
     download = false
-
-    // Set the work directory for unpacking node
     workDir = file("${project.buildDir}/nodejs")
+    npmWorkDir = file("${project.projectDir}/src/main/webapp")
+    nodeModulesDir = file("${project.projectDir}/src/main/webapp")
+}
 
-    // Set the work directory for NPM
-    npmWorkDir = file("${project.buildDir}/src/main/webapp")
-
-    // Set the work directory where node_modules should be located
-    nodeModulesDir = file("${project.projectDir}/src/main/webapp/node_modules")
+gulp {
+    workDir = file("${project.projectDir}/src/main/webapp")
 }
 
 sourceSets {
@@ -97,3 +92,12 @@ compileHyperonGeneratedJava.dependsOn tasks.getByName('bundle2java')
 classes.dependsOn hyperonGeneratedClasses
 compileJava.dependsOn compileHyperonGeneratedJava
 
+gulp_default.dependsOn installGulp
+gulp_default.dependsOn npmInstall
+processResources.dependsOn gulp_default
+
+bootRun.dependsOn gulp_default, npmInstall
+
+
+clean.delete << file("${project.projectDir}/src/main/webapp/node_modules")
+clean.delete << file("${project.projectDir}/src/main/webapp/styles")
