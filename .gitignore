@@ -1,0 +1,13 @@
+*.iml
+atlassian-ide-plugin.xml
+target
+.idea
+rebel.xml
+.classpath
+.project
+.settings
+.checkstyle
+nb-configuration.xml
+/node_modules
+/styles
+/generated-sources
