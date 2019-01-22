@@ -1,0 +1,103 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.1.RELEASE'
+        codegenGradleVersion = '0.1.35'
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: springBootVersion
+        classpath group: 'pl.decerto.hyperon.persistence', name: 'codegen-gradle-plugin', version: codegenGradleVersion
+    }
+}
+
+plugins {
+    id "com.moowork.gulp" version "1.2.0"
+}
+
+apply plugin: 'java'
+apply plugin: 'java-library'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'codegen-gradle-plugin'
+
+group = 'pl.decerto'
+version = '1.0.0'
+sourceCompatibility = 11
+
+def hyperonVersion = '1.6.36'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+// read more here: https://github.com/srs/gradle-node-plugin/blob/master/docs/node.md
+node {
+    download = false
+    workDir = file("${project.buildDir}/nodejs")
+    npmWorkDir = file("${project.projectDir}/src/main/webapp")
+    nodeModulesDir = file("${project.projectDir}/src/main/webapp")
+}
+
+gulp {
+    workDir = file("${project.projectDir}/src/main/webapp")
+}
+
+sourceSets {
+    hyperonGenerated {
+        compileClasspath = configurations.hyperonGeneratedCompile
+        java {
+            srcDir file("generated-sources")
+        }
+    }
+    main {
+        compileClasspath += hyperonGenerated.output
+        runtimeClasspath += hyperonGenerated.output
+    }
+    test {
+        compileClasspath += hyperonGenerated.output
+        runtimeClasspath += hyperonGenerated.output
+    }
+
+}
+
+bundle2java {
+    bundleDefPath = "$projectDir/src/main/resources/bundle.def"
+    generationPath = "$projectDir/generated-sources".toString()
+    entitiesPackage = 'pl.decerto.app.model'
+    servicePackage = 'pl.decerto.app.service'
+    setterChaining = true
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-jdbc:2.0.3.RELEASE')
+    implementation('commons-dbcp:commons-dbcp:1.4')
+
+    compile sourceSets.hyperonGenerated.output
+    api group: 'pl.decerto', name: 'hyperon-runtime', version: hyperonVersion
+    api group: 'pl.decerto', name: 'hyperon-persistence', version: hyperonVersion
+
+    hyperonGeneratedCompile group: 'pl.decerto', name: 'hyperon-persistence', version: hyperonVersion
+    hyperonGeneratedCompile group: 'org.springframework.boot', name: 'spring-boot-starter'
+
+    runtimeOnly('com.h2database:h2:1.4.196')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
+
+compileHyperonGeneratedJava.dependsOn tasks.getByName('bundle2java')
+classes.dependsOn hyperonGeneratedClasses
+compileJava.dependsOn compileHyperonGeneratedJava
+
+gulp_default.dependsOn installGulp
+gulp_default.dependsOn npmInstall
+processResources.dependsOn gulp_default
+
+bootRun.dependsOn gulp_default, npmInstall
+
+
+clean.delete << file("${project.projectDir}/src/main/webapp/node_modules")
+clean.delete << file("${project.projectDir}/src/main/webapp/styles")

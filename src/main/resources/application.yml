@@ -1,0 +1,20 @@
+server.port: 8081
+
+hyperon:
+  database:
+    url: jdbc:h2:c:/work/hyperon-studio-1.6.15/database/hyperon.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
+    username: sa
+    password: sa
+    dialect: h2
+  dev:
+    mode: false
+    user: admin
+  profile: DEMO
+
+gmo:
+  database:
+    url: jdbc:h2:./db/gmo.hyperon.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
+    username: sa
+    password: sa
+    dialect: h2
+    recreate: true
