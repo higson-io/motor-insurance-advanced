@@ -94,12 +94,12 @@ public class HyperonIntegrationConfiguration {
 		return hyperonEngineFactory.create();
 	}
 
-	@Bean("gmoDataSource")
+	@Bean("hyperonPersistenceDataSource")
 	public DataSource secondaryDataSource() {
 		var dataSource = new BasicDataSource();
-		dataSource.setUsername(env.getProperty("gmo.database.username"));
-		dataSource.setPassword(env.getProperty("gmo.database.password"));
-		dataSource.setUrl(env.getProperty("gmo.database.url"));
+		dataSource.setUsername(env.getProperty("hyperon.persistence.database.username"));
+		dataSource.setPassword(env.getProperty("hyperon.persistence.database.password"));
+		dataSource.setUrl(env.getProperty("hyperon.persistence.database.url"));
 		dataSource.setInitialSize(4);
 		dataSource.setMaxActive(8);
 		dataSource.setDriverClassName(getDialectTemplate().getJdbcDriverClassName());
@@ -119,9 +119,9 @@ public class HyperonIntegrationConfiguration {
 		factory.setDataSource(secondaryDataSource());
 		factory.setAutoStartWatchers(false);
 		factory.setDefaultProfile(env.getProperty("hyperon.profile"));
-		factory.setGmoDbDialect(env.getProperty("gmo.database.dialect"));
-		factory.setHiloSequenceName("gmo_seq");
-		factory.setBundleTable("gmo_bundle");
+		factory.setGmoDbDialect(env.getProperty("hyperon.persistence.database.dialect"));
+		factory.setHiloSequenceName("persistence_seq");
+		factory.setBundleTable("persistence_bundle");
 		factory.setBundleColumn("bid");
 		factory.setOwnerColumn("parentid");
 		factory.setOwnerPropertyColumn("collname");

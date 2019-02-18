@@ -14,13 +14,13 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 
 @Configuration
-@ConditionalOnProperty(value = "gmo.database.recreate", havingValue = "true")
+@ConditionalOnProperty(value = "hyperon.persistence.database.recreate", havingValue = "true")
 public class DBGmoInitializer {
 
 	private final Logger log = LoggerFactory.getLogger(DBGmoInitializer.class);
 
 	@Autowired
-	@Qualifier("gmoDataSource")
+	@Qualifier("hyperonPersistenceDataSource")
 	private DataSource dataSource;
 
 	@Autowired
