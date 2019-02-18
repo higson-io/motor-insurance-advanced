@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import pl.decerto.motorinsuranceadvanced.dao.QuoteRepository;
 import pl.decerto.hyperon.persistence.factory.HyperonPersistenceFactory;
+import pl.decerto.motorinsuranceadvanced.dao.QuoteRepository;
 
 @Repository
 public class QuoteRepositoryImpl implements QuoteRepository {
 
-	private static final String MAX_QUOTE_ID = "select gmo.id\n" +
-		"from %s gmo\n" +
+	private static final String MAX_QUOTE_ID = "select per.id\n" +
+		"from %s per\n" +
 		"inner join (Select max(created) as max_date from %s) max\n" +
-		"where gmo.created = max.max_date";
+		"where per.created = max.max_date";
 
 	private final HyperonPersistenceFactory factory;
 	private final JdbcTemplate jdbcTemplate;
@@ -27,8 +27,8 @@ public class QuoteRepositoryImpl implements QuoteRepository {
 	}
 
 	@Override public Optional<Integer> findLastQuoteId() {
-		var gmoTable = factory.getConf().bundleTable();
-		var query = String.format(MAX_QUOTE_ID, gmoTable, gmoTable);
+		var bundleTable = factory.getConf().bundleTable();
+		var query = String.format(MAX_QUOTE_ID, bundleTable, bundleTable);
 
 		return jdbcTemplate.query(query, (rs, rowNum) -> rs.getInt("id"))
 			.stream()

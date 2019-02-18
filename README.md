@@ -1,6 +1,6 @@
 # Hyperon Motor-Insurance Demo App
 
-This is a sample application to demonstrate capabilities of Hyperon.io library and our own persistence mechanism - called GMO.
+This is a sample application to demonstrate capabilities of Hyperon.io library and our own persistence mechanism - called hyperon-persistence.
 
 Hyperon.io tutorials are available [here](http://hyperon.io/tutorials/getting-started).
 
@@ -46,29 +46,31 @@ Make sure that both commands ```gradle``` and ```npm``` are accessible through s
 This sample is using two databases. One is used by Hyperon Studio - H2 database file, second database is "business" H2 database file. This
 second database might be separate user's DB, but hyperon has possibility of managing context entities by itself.
 
-In file ```application.yml``` set ```hyperon.database.url``` to point Hyperon Studio H2 database file. Path ```gmo.database.url``` points
- by default to business H2 database file, that is in this project, e.g.:
+In file ```application.yml``` set ```hyperon.database.url``` to point Hyperon Studio H2 database file.
+Path ```hyperon.persistence.database.url``` points by default to business H2 database file, that is in this project, e.g.:
 ```text
 hyperon:
     database:
         url: jdbc:h2:/srv/hyperon-studio-1.6.27/database/hyperon.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
-gmo:
-    database:
-        url: jdbc:h2:./db/gmo.hyperon.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
+
+    persistence:
+        database:
+            url: jdbc:h2:./db/hyperon.persistence.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
 ```
 or on Windows
 ```text
 hyperon:
     database:
         url: jdbc:h2:c:/hyperon-studio-1.6.27/database/hyperon.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
-gmo:
-    database:
-        url: jdbc:h2:./db/gmo.hyperon.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
+
+    persistence:
+        database:
+            url: jdbc:h2:./db/hyperon.persistence.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
 ```
 
 Other important configuration properties
 hyperon.profile - profile name defined in Hyperon Studio
-gmo.recreate - flag true/false, for business database recreation from script file located: resources\sql\schema.sql
+hyperon.persistence.recreate - flag true/false, for business database recreation from script file located: resources\sql\schema.sql
 
 ## Running
 

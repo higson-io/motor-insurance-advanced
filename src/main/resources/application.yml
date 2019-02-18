@@ -11,10 +11,10 @@ hyperon:
     user: admin
   profile: DEMO
 
-gmo:
-  database:
-    url: jdbc:h2:./db/gmo.hyperon.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
-    username: sa
-    password: sa
-    dialect: h2
-    recreate: true
+  persistence:
+    database:
+      url: jdbc:h2:./db/hyperon.persistence.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
+      username: sa
+      password: sa
+      dialect: h2
+      recreate: true
