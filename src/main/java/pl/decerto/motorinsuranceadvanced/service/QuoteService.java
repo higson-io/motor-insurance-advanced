@@ -28,15 +28,14 @@ public class QuoteService {
 	@PostConstruct
 	public void initializeQuote() {
 		log.info("PostConstruct for QuoteService");
+		initBundleRoot();
 	}
 
 	public Quote getQuote() {
-		initBundleRoot();
 		return sessionRootContext.getQuote();
 	}
 
 	public Quote recalculateQuote() {
-		initBundleRoot();
 		BundleRoot recalculated = motor.recalculate(sessionRootContext);
 		return recalculated.getQuote();
 	}
