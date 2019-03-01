@@ -89,5 +89,7 @@ In resources\bundle.def - this file is exported from Hyperon Studio, for codegen
 them in the project.
 In resources\sql\schema.sql - this file contains drop/creates of tables that match definition provided in Hyperon Studio.
 
-
+## Guide
+For this application example, there is tutorial added to this project.
+It is available under <i>guide</i> directory.
 
