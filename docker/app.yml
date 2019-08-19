@@ -1,0 +1,12 @@
+server.port: 8081
+
+hyperon:
+  database:
+    url: ${HYPERON_DATABASE_URL}
+    username: sa
+    password: sa
+    dialect: h2
+# enable to see unpublished changes made in Hyperon Studio by a given user
+  dev:
+    mode: false
+    user: admin
