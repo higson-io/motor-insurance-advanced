@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +25,6 @@ import pl.decerto.app.model.Option;
 import pl.decerto.app.model.Quote;
 import pl.decerto.app.model.Vehicle;
 import pl.decerto.app.service.HyperonPersistenceService;
-import pl.decerto.motorinsuranceadvanced.dao.QuoteRepository;
 import pl.decerto.hyperon.persistence.context.AppCtx;
 import pl.decerto.hyperon.persistence.proxy.HyperonPersistence;
 import pl.decerto.hyperon.persistence.service.BundleService;
@@ -32,9 +32,11 @@ import pl.decerto.hyperon.runtime.core.HyperonContext;
 import pl.decerto.hyperon.runtime.core.HyperonEngine;
 import pl.decerto.hyperon.runtime.model.HyperonDomainObject;
 import pl.decerto.hyperon.runtime.rhino.RhinoDate;
+import pl.decerto.motorinsuranceadvanced.dao.QuoteRepository;
 
 @PropertySource("classpath:application.yml")
 @Component
+@DependsOn("DBGmoInitializer")
 public class Motor {
 
 	private static final Logger log = LoggerFactory.getLogger(Motor.class);
