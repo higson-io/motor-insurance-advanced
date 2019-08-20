@@ -42,6 +42,12 @@ node {
     nodeModulesDir = file("${project.projectDir}/src/main/webapp")
 }
 
+processResources {
+    from ('src/main/webapp') {
+        into 'public'
+    }
+}
+
 gulp {
     workDir = file("${project.projectDir}/src/main/webapp")
 }
