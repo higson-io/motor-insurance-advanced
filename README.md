@@ -83,6 +83,35 @@ Execute below gradle command to run Spring Boot.
 Application will be accessible on port 8081. If you need to use other port change it in ```application.yml``` -> ```server.port```.
 URL: [http://localhost:8081/](http://localhost:8081/)
 
+## Running with Docker
+This demo application can be run in docker container based on provided Dockerfile.
+For building image execute code below:
+```text
+docker build -t hyperonio/advanced-motor-demo .
+```
+Build is optional since advanced-motor-demo is available on docker hub:
+```text
+hyperonio/advanced-motor-demo:latest
+```
+If image is build, then application can be run in docker container like:
+```text
+docker run -p 38080:8081 
+    -e mpp.database.url=<jdbc_url_to_running_db>
+    -e mpp.database.dialect=<choose>
+    -e mpp.database.username=<db_username>
+    -e mpp.database.password=<db_password>
+    -e mpp.environment.id=hyperon_docker
+    hyperonio/advanced-motor-demo
+```
+
+OR application can be run with bundle-h2-demo and hyperon-studio images
+using docker-compose based on docker-compose.yml. Simply run:
+```text
+docker-compose up
+```
+* By default Hyperon Studio will be available at: [host]:38080/hyperon/app
+* By default Demo application will be available at: [host]:48080
+
 ## Other information
 
 In resources\bundle.def - this file is exported from Hyperon Studio, for codegen plugin used to generate required classes. Developer can use
