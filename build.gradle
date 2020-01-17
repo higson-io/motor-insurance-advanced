@@ -27,7 +27,7 @@ group = 'pl.decerto'
 version = '1.0.0'
 sourceCompatibility = 11
 
-def hyperonVersion = '1.6.36'
+def hyperonVersion = '1.8.5'
 
 repositories {
     mavenCentral()
@@ -90,7 +90,7 @@ dependencies {
     hyperonGeneratedCompile group: 'pl.decerto', name: 'hyperon-persistence', version: hyperonVersion
     hyperonGeneratedCompile group: 'org.springframework.boot', name: 'spring-boot-starter'
 
-    runtimeOnly('com.h2database:h2:1.4.196')
+    runtimeOnly('com.h2database:h2:1.4.199')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
