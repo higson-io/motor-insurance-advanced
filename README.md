@@ -2,7 +2,7 @@
 
 This is a sample application to demonstrate capabilities of Hyperon.io library and our own persistence mechanism - called hyperon-persistence.
 
-Hyperon.io tutorials are available [here](http://hyperon.io/tutorials/getting-started).
+Hyperon.io tutorials are available [here](https://www.hyperon.io/docs/tutorials).
 
 ## Prerequisites
 
@@ -35,9 +35,9 @@ npm install npm@latest -g
 
 1. Go to:
 
-http://hyperon.io/download
+https://www.hyperon.io/docs/download
 
-2. Download bundle, unpack it to the directory of your choice and run it as described [here](http://hyperon.io/tutorials/deploying-hyperon-studio).
+2. Download bundle, unpack it to the directory of your choice and run it as described [here](https://www.hyperon.io/tutorial/installing-hyperon-studio).
 
 ## Setup
 
