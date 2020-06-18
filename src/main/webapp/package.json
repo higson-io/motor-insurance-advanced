@@ -7,7 +7,7 @@
   ],
   "author": "Decerto",
   "dependencies": {
-    "angular": "1.6.2",
+    "angular": "1.8.0",
     "angular-ui-bootstrap": "^2.5.0",
     "angular-tooltips": "1.1.10",
     "bootstrap": "^3.3.7",
