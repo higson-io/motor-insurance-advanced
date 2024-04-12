@@ -1,8 +1,8 @@
-# Hyperon Motor-Insurance Demo App
+# Higson Motor-Insurance Demo App
 
-This is a sample application to demonstrate capabilities of Hyperon.io library and our own persistence mechanism - called hyperon-persistence.
+This is a sample application to demonstrate capabilities of Higson.io library and our own persistence mechanism - called higson-persistence.
 
-Hyperon.io tutorials are available [here](https://www.hyperon.io/docs/tutorials).
+Higson.io tutorials are available [here](https://www.higson.io/docs/start-documentation).
 
 ## Prerequisites
 
@@ -31,45 +31,45 @@ To update:
 npm install npm@latest -g
 ```
 
-#### Hyperon Studio 1.6.27
+#### Higson Studio 4.0.2
 
 1. Go to:
 
-https://www.hyperon.io/docs/download
+https://www.higson.io/docs/download
 
-2. Download bundle, unpack it to the directory of your choice and run it as described [here](https://www.hyperon.io/tutorial/installing-hyperon-studio).
+2. Download bundle, unpack it to the directory of your choice and run it as described [here](https://www.higson.io/docs/start-documentation).
 
 ## Setup
 
 Make sure that both commands ```gradle``` and ```npm``` are accessible through system path. If not, add them.
 
-This sample is using two databases. One is used by Hyperon Studio - H2 database file, second database is "business" H2 database file. This
-second database might be separate user's DB, but hyperon has possibility of managing context entities by itself.
+This sample is using two databases. One is used by Higson Studio - H2 database file, second database is "business" H2 database file. This
+second database might be separate user's DB, but higson has possibility of managing context entities by itself.
 
-In file ```application.yml``` set ```hyperon.database.url``` to point Hyperon Studio H2 database file.
+In file ```application.yml``` set ```hyperon.database.url``` to point Higson Studio H2 database file.
 Path ```hyperon.persistence.database.url``` points by default to business H2 database file, that is in this project, e.g.:
 ```text
 hyperon:
     database:
-        url: jdbc:h2:/srv/hyperon-studio-1.6.27/database/hyperon.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
+        url: jdbc:h2:/srv/higson-studio/database/higson.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
 
     persistence:
         database:
-            url: jdbc:h2:./db/hyperon.persistence.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
+            url: jdbc:h2:./db/higson.persistence.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
 ```
 or on Windows
 ```text
 hyperon:
     database:
-        url: jdbc:h2:c:/hyperon-studio-1.6.27/database/hyperon.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
+        url: jdbc:h2:c:/higson-studio/database/higson.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
 
     persistence:
         database:
-            url: jdbc:h2:./db/hyperon.persistence.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
+            url: jdbc:h2:./db/higson.persistence.demo.motor;AUTO_SERVER=TRUE;MVCC=TRUE;IFEXISTS=TRUE
 ```
 
 Other important configuration properties
-hyperon.profile - profile name defined in Hyperon Studio
+hyperon.profile - profile name defined in Higson Studio
 hyperon.persistence.recreate - flag true/false, for business database recreation from script file located: resources\sql\schema.sql
 
 ## Running
@@ -87,11 +87,11 @@ URL: [http://localhost:8081/](http://localhost:8081/)
 This demo application can be run in docker container based on provided Dockerfile.
 For building image execute code below:
 ```text
-docker build -t hyperonio/advanced-motor-demo .
+docker build -t io/advanced-motor-demo .
 ```
 Build is optional since advanced-motor-demo is available on docker hub:
 ```text
-hyperonio/advanced-motor-demo:latest
+io/advanced-motor-demo:latest
 ```
 If image is build, then application can be run in docker container like:
 ```text
@@ -100,23 +100,23 @@ docker run -p 38080:8081
     -e mpp.database.dialect=<choose>
     -e mpp.database.username=<db_username>
     -e mpp.database.password=<db_password>
-    -e mpp.environment.id=hyperon_docker
+    -e mpp.environment.id=higson_docker
     hyperonio/advanced-motor-demo
 ```
 
-OR application can be run with bundle-h2-demo and hyperon-studio images
+OR application can be run with bundle-h2-demo and higson-studio images
 using docker-compose based on docker-compose.yml. Simply run:
 ```text
 docker-compose up
 ```
-* By default Hyperon Studio will be available at: [host]:38080/hyperon/app
+* By default Higson Studio will be available at: [host]:38080/higson/app
 * By default Demo application will be available at: [host]:48080
 
 ## Other information
 
-In resources\bundle.def - this file is exported from Hyperon Studio, for codegen plugin used to generate required classes. Developer can use
+In resources\bundle.def - this file is exported from Higson Studio, for codegen plugin used to generate required classes. Developer can use
 them in the project.
-In resources\sql\schema.sql - this file contains drop/creates of tables that match definition provided in Hyperon Studio.
+In resources\sql\schema.sql - this file contains drop/creates of tables that match definition provided in Higson Studio.
 
 ## Guide
 For this application example, there is tutorial added to this project.
